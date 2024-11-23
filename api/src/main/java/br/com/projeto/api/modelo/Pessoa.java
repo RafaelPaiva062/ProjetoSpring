@@ -1,8 +1,6 @@
 package br.com.projeto.api.modelo;
 
-import javax.persistence.Entity;
 
-@Entity
 public class Pessoa {
     private int codigo;
     private String nome;
