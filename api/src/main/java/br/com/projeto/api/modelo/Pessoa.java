@@ -1,5 +1,8 @@
 package br.com.projeto.api.modelo;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Pessoa {
     private int codigo;
     private String nome;
@@ -15,6 +18,14 @@ public class Pessoa {
     }
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
 }
