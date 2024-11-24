@@ -1,6 +1,6 @@
 package br.com.projeto.api.modelo;
 
-
+@Entity
 public class Pessoa {
     private int codigo;
     private String nome;
