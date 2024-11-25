@@ -14,6 +14,10 @@ import br.com.projeto.api.repositorio.Repositorio;
 public class Controle {
    @Autowired
    private Repositorio acao;
+   @PostMapping("/api")
+   public Pessoa cadastrar(@RequestBody Pessoa obj){
+      return acao.save(obj);
+   }
    @GetMapping("")
    public String mensagen(){
     return "Hello World!";
