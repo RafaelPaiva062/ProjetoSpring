@@ -13,7 +13,7 @@ public class Pessoa {
     private int codigo;
     private String nome;
     private int idade;
-    public String getNome() {
+    public String getNome() { 
         return nome;
     }
     public void setNome(String nome) {
