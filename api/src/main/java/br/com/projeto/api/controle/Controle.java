@@ -3,6 +3,8 @@ package br.com.projeto.api.controle;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,19 +15,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.projeto.api.modelo.Pessoa;
 import br.com.projeto.api.repositorio.Repositorio;
+import br.com.projeto.api.servico.Servico;
 
 @RestController
 public class Controle {
    @Autowired
    private Repositorio acao;
+
+   @Autowired
+   private Servico servico;
    @PostMapping("/api")
-   public Pessoa cadastrar(@RequestBody Pessoa obj){
-      return acao.save(obj);
+   public ResponseEntity<?> cadastrar(@RequestBody Pessoa obj){
+      return servico.cadastrar(obj);
    }
    @GetMapping("/api")
-    public List<Pessoa> selecionar()
+    public ResponseEntity<?> selecionar()
     {
-      return acao.findAll();
+      return servico.selecionar();
     }
     @GetMapping("/api/{codigo}")
     public Pessoa selecionarPeloCodigo(@PathVariable int codigo){
@@ -96,5 +102,11 @@ public class Controle {
    @PostMapping("/pessoa")
   public Pessoa pessoa(@RequestBody Pessoa p){
     return p;
+  }
+
+
+  @GetMapping("/status")
+  public ResponseEntity<?> status(){
+   return  new ResponseEntity<>(HttpStatus.CREATED);
   }
 }
