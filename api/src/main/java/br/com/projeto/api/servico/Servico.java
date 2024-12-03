@@ -40,4 +40,33 @@ public class Servico {
         return new ResponseEntity<>(acao.findAll(), HttpStatus.OK);
         
     }
+
+    // Métudo para selecionar pesssoas através do código
+
+    public ResponseEntity<?> selecionarPeloCodigo(int codigo){
+    if(acao.countByCodigo(codigo)==0){
+        mensagem.setMensagem("Não foi entrada nenhuma pessoa.");
+        return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
+    }else{
+        return new ResponseEntity<>(acao.findByCodigo(codigo), HttpStatus.OK);
+    }
+    }
+
+
+    // Método para editiar dados 
+    public ResponseEntity<?>editar(Pessoa obj){
+        if (acao.countByCodigo(obj.getCodigo())== 0) {
+            mensagem.setMensagem("O código  informado não existe.");
+            return new ResponseEntity<>(mensagem,HttpStatus.NOT_FOUND);
+        }else if(obj.getNome().equals("")){
+            mensagem.setMensagem("É necessário  informar um nome");
+            return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
+        }else if(obj.getIdade() < 0){
+            mensagem.setMensagem("Informe sua idade valída");
+            return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
+        }else{
+            return new ResponseEntity<>(acao.save(obj), HttpStatus.OK);
+        }
+
+    }
 }

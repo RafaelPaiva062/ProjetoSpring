@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mysql.cj.x.protobuf.Mysqlx.ClientMessages;
+
+import br.com.projeto.api.modelo.Cliente;
 import br.com.projeto.api.modelo.Pessoa;
 import br.com.projeto.api.repositorio.Repositorio;
 import br.com.projeto.api.servico.Servico;
+import jakarta.validation.Valid;
 
 @RestController
 public class Controle {
@@ -28,24 +32,30 @@ public class Controle {
    public ResponseEntity<?> cadastrar(@RequestBody Pessoa obj){
       return servico.cadastrar(obj);
    }
+
    @GetMapping("/api")
     public ResponseEntity<?> selecionar()
     {
       return servico.selecionar();
     }
+
     @GetMapping("/api/{codigo}")
-    public Pessoa selecionarPeloCodigo(@PathVariable int codigo){
-      return acao.findByCodigo(codigo);
+    public ResponseEntity<?> selecionarPeloCodigo(@PathVariable int codigo){
+      return servico.selecionarPeloCodigo(codigo); 
     }
+
+
     @PutMapping("/api")
-    public Pessoa editor(@RequestBody Pessoa obj){
-       return acao.save(obj);
+    public ResponseEntity<?> editor(@RequestBody Pessoa obj){
+       return servico.editar(obj);
     }
+
     @DeleteMapping("/api/{codigo}")
     public void remover(@PathVariable  int codigo){
-        Pessoa obj = selecionarPeloCodigo(codigo);
-        acao.delete(obj);
+        // Pessoa obj = selecionarPeloCodigo(codigo);
+        // acao.delete(obj);
     }
+
     @GetMapping("/api/contador")
     public long contador(){
         return acao.count();
@@ -91,22 +101,30 @@ public class Controle {
    public String mensagen(){
     return "Hello World!";
    }
+
    @GetMapping("/boasVindas")
    public String boasVindas(){
       return "Seja Bem-Vindo(a)";
    }
+
    @GetMapping("/boasVindas/{nome}")
    public String boasVindas(@PathVariable String nome){
       return "Seja Bem-Vindo(a)" + nome;
    }
+
    @PostMapping("/pessoa")
   public Pessoa pessoa(@RequestBody Pessoa p){
     return p;
   }
 
-
   @GetMapping("/status")
   public ResponseEntity<?> status(){
    return  new ResponseEntity<>(HttpStatus.CREATED);
   }
+  
+  @PostMapping("/cliente")
+   public void cliente(@Valid @RequestBody Cliente obj){
+    
+    
+   }
 }
