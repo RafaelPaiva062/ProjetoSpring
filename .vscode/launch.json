@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ApiApplication",
+            "request": "launch",
+            "mainClass": "br.com.projeto.api.ApiApplication",
+            "projectName": "foodsenai"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-ApiApplication<api>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
